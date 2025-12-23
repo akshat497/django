@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Student</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Add Student</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="name" class="input-box">
+    <input type="number" name="age" class="input-box">
+    <input type="email" name="email" class="input-box">
+
+    <button class="btn">Save</button>
+  </form>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+body {
+  font-family: Arial;
+}
+
+.form-box {
+  width: 300px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.input-box {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background: blue;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
+.form-box {
+  background: yellow !important;
+}

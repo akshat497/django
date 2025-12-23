@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students List</title>
+
+    <style>
+        /* Modal background */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* Modal box */
+        .modal-content {
+            background: white;
+            width: 400px;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Students</h2>
+
+<a href="{% url 'add' %}">➕ Add Student</a>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+            <button onclick="openEditModal(
+                '{{ student.id }}',
+                '{{ student.name }}',
+                '{{ student.age }}',
+                '{{ student.email }}'
+            )">
+                ✏️ Edit
+            </button>
+              <button ><a href="{% url 'delete' student.id %}" onclick="return confirm('Are you sure?')">🗑️ Delete</a></button>
+        </td>
+       
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- 🔥 EDIT MODAL -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <h3>Edit Student</h3>
+
+        <form method="POST" >
+            {% csrf_token %}
+
+            <input type="hidden" name="id" id="studentId">
+
+            <label>Name:</label><br>
+            <input type="text" name="name" id="studentName"><br><br>
+
+            <label>Age:</label><br>
+            <input type="number" name="age" id="studentAge"><br><br>
+
+            <label>Email:</label><br>
+            <input type="email" name="email" id="studentEmail"><br><br>
+
+            <button type="submit">Update</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openEditModal(id, name, age, email) {
+        document.getElementById("studentId").value = id;
+        document.getElementById("studentName").value = name;
+        document.getElementById("studentAge").value = age;
+        document.getElementById("studentEmail").value = email;
+
+        document.getElementById("editModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("editModal").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
