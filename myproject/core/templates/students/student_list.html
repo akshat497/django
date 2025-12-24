@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Students List</title>
@@ -61,7 +61,7 @@
     {% endfor %}
 </table>
 
-<!-- 🔥 EDIT MODAL -->
+
 <div class="modal" id="editModal">
     <div class="modal-content">
         <h3>Edit Student</h3>
@@ -102,4 +102,96 @@
 </script>
 
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Students List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/style.css' %}" />
+  </head>
+  <body>
+    <h2>Students</h2>
+
+    <table border="1">
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </thead>
+      {% for student in students %}
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <button>
+            <a
+              href="{% url 'delete' student.id %}"
+              onclick="return confirm('Are you sure you want to delete?')"
+              >Delete</a
+            >
+          </button>
+          <button
+            onclick="OpenEditModal(
+                '{{ student.id }}',
+                '{{ student.name }}',
+                '{{ student.age }}',
+                '{{ student.email }}'
+         )"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <div class="modalWrapper">
+      <div class="modal">
+         <div class="modal-content">
+        <h3>Edit Student</h3>
+
+        <form method="POST" id="editForm">
+            {% csrf_token %}
+
+            <input type="hidden" name="id" id="id">
+
+            <label>Name:</label><br>
+            <input type="text" name="name" id="name"><br><br>
+
+            <label>Age:</label><br>
+            <input type="number" name="age" id="age"><br><br>
+
+            <label>Email:</label><br>
+            <input type="email" name="email" id="email"><br><br>
+
+            <button type="submit" id="update">Update</button>
+        </form>
+    </div>
+      </div>
+      <p class="closeModalButton">X</p>
+    </div>
+    <script>
+      const modalWrapper = document.querySelector(".modalWrapper");
+      const closeModalButton = document.querySelector(".closeModalButton");
+
+      closeModalButton.addEventListener("click", () => {
+        modalWrapper.style.display = "none";
+      });
+
+      function OpenEditModal(id, name, age, email) {
+        console.log(id, name, age, email);
+        document.getElementById("name").value = name;
+        document.getElementById("age").value = age;
+        document.getElementById("email").value = email;
+       document.getElementById("editForm").action = `/students/edit/${id}/`;
+
+        modalWrapper.style.display = "flex";
+      }
+    </script>
+  </body>
 </html>

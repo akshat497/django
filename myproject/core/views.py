@@ -26,16 +26,16 @@ def student_list(request):
     students = Student.objects.all()  # SELECT * FROM student
     return render(request, 'students/student_list.html', {'students': students})
 
-def delete_student(request, id):
-    student = get_object_or_404(Student, id=id)
+def delete_student(request, idFromUser):
+    student = get_object_or_404(Student, id=idFromUser)
     student.delete()
     return redirect('list')
 
 def edit_student(request,id):
     student=get_object_or_404(Student, id=id)
     error=None
-    if student.objects.filter(email=student.email).exclude(id=student.id).exists():
-        error="Email already exists!"
+    # if student.objects.filter(email=student.email).exclude(id=student.id).exists():
+        # error="Email already exists!"
     if request.method=="POST":
         student.name=request.POST['name']
         student.age=request.POST['age']
