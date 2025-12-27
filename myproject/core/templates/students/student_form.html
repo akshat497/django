@@ -13,10 +13,10 @@
 
   <form method="POST">
     {% csrf_token %}
-
-    <input type="text" name="name" class="input-box">
+    {{ form.as_p }}
+    {% comment %} <input type="text" name="name" class="input-box">
     <input type="number" name="age" class="input-box">
-    <input type="email" name="email" class="input-box">
+    <input type="email" name="email" class="input-box"> {% endcomment %}
 
     <button class="btn">Save</button>
   </form>
