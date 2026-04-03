@@ -23,7 +23,7 @@ from .form import StudentForm
 
 #     return render(request, 'students/student_form.html', {'error': error})
 def add_student(request):
-    form = StudentForm(request.POST or None)
+    form = StudentForm(request.POST)
 
     if request.method == "POST":
         if form.is_valid():
