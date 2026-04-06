@@ -5,6 +5,18 @@
 </head>
 <body>          
     <h1>Staff List</h1>
+
+    <ul>
+        {%for i in staff_list %}
+        <li>{{i.name}}</li>
+        <li>{{i.age}}</li>
+        <li>{{i.salary}}</li>
+        <li>{{i.email}}</li>
+        <button><a href="{% url 'delete' i.staff_id %}">Delete</a></button>
+        {% endfor %}
+
+
+    </ul>
    
 </body>
 </html>

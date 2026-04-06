@@ -14,7 +14,7 @@ urlpatterns=[
 # student.filter(age=25)
 # student.filter(age__gt=20)  # age > 20
 # student.filter(age__lt=30)  # age < 30
-# student.filter(name__icontains='ak')# name contains 'john' (case-ins
+# student.filter(name__icontains='ak')# name contains 'ak' (case-ins
 # student.order_by('age')  # order by age ascending
 # student.objects.order_by('-age')  # order by age descending
 # student.objects.reverse()
@@ -40,4 +40,4 @@ urlpatterns=[
 
 # student.objects.filter(id=1).delete()
 
-course.objects.select_related('student') # for foreign key relationships
+# course.objects.select_related('student') # for foreign key relationships

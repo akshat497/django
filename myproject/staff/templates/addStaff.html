@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Add Staff</title>
+</head>
+<body>
+<div class="form-box">
+  <h2>Add Staff</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    
+    <input type="text" name="name" class="input-box">
+    <label for="age">Age:</label>
+    
+    <input type="number" name="age" class="input-box">
+    <label for="email">Email:</label>
+   
+    <input type="email" name="email" class="input-box">
+     <label for="salary">Salary:</label>
+    <input type="number" name="salary" class="input-box">
+
+    <button class="btn">Save</button>
+  </form>
+</div>
+</body>
+</html>
