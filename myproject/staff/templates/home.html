@@ -21,5 +21,13 @@
             {% endfor %}
         </ul>
     {% endif %}
+    <a href="{% url 'set_session' %}">Set Session</a>
+     <a href="{% url 'get_session' %}">Get Session</a>
+     <a href="{% url 'set_cookie' %}">Set Cookie</a>
+     <a href="{% url 'get_cookie' %}">Get Cookie</a>
+     <h4>Session User: {{ user }}</h4>
+      <h4>Cookie Username: {{ username }}</h4>
+    <h2>Welcome, {{ user }}!</h2>
+
 </body>
 </html>

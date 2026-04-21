@@ -1,3 +1,5 @@
+from urllib import request, response
+
 from django.shortcuts import redirect, render
 from .models import Staff
 from django.http import JsonResponse as jsonResponse
@@ -30,6 +32,8 @@ def staff_list(request):
 def user_list(request):
     users=User.objects.all()
     return render(request, 'userList.html', {'users': users})
+
+
 def activeStaff(request):
     staff=Staff.objects.filter(salary__gt=50000)
     return render(request, 'activeStaff.html', {'staff_list': staff})
@@ -55,3 +59,21 @@ def delete_staff(request, staff_id):
     except Staff.DoesNotExist:
         return jsonResponse({'message': 'Staff not found'}, status=404)
     
+def set_session(request):
+ request.session['user'] = 'Amit'
+ return render(request, 'Home.html')
+
+
+def get_session(request):
+ user = request.session.get('user', 'Guest')
+ return render(request, 'Home.html', {'user': user})
+
+def set_cookie(request):
+ response = render(request, 'Home.html')
+ response.set_cookie('username', 'Rahul', max_age=3600)
+ return response
+
+
+def get_cookie(request):
+ username = request.COOKIES.get('username', 'Guest')
+ return render(request, 'Home.html', {'username': username})
