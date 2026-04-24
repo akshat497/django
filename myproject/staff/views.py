@@ -7,7 +7,11 @@ from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Staff
+from .serializers import StaffSerializer
 
 # Create your views here.
 def home(request):
@@ -77,3 +81,10 @@ def set_cookie(request):
 def get_cookie(request):
  username = request.COOKIES.get('username', 'Guest')
  return render(request, 'Home.html', {'username': username})
+
+@api_view(['GET'])
+def staff_list(request):
+    if request.method == 'GET':
+        staff = Staff.objects.all()
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
